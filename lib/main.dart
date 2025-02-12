@@ -20,7 +20,7 @@ class MyAppState extends State<MyApp> {
   late VideoPlayerController _controller;
   bool _isVideoPlaying = false;
   String _currentVideoUrl = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
-
+  
   final List<Map<String, String>> videoUrls = [
     {
       'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
@@ -40,7 +40,7 @@ class MyAppState extends State<MyApp> {
       'channel': 'Blender Foundation',
       'thumbnail': 'https://t3.ftcdn.net/jpg/08/98/83/96/360_F_898839604_7RcqsUoZHOaZNB25DIDh5DwtQyNeAz5U.jpg'
     },
-    {
+     {
       'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
       'title': 'Big Buck Bunny',
       'channel': 'Blender Foundation',
@@ -58,24 +58,7 @@ class MyAppState extends State<MyApp> {
       'channel': 'Blender Foundation',
       'thumbnail': 'https://t3.ftcdn.net/jpg/08/98/83/96/360_F_898839604_7RcqsUoZHOaZNB25DIDh5DwtQyNeAz5U.jpg'
     },
-    {
-      'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-      'title': 'Big Buck Bunny',
-      'channel': 'Blender Foundation',
-      'thumbnail': 'https://www.arena-multimedia.com/uploads/blogs/posts/Arena_blog_Whats_the_process_followed_for_creating_an_animated_video_.jpg'
-    },
-    {
-      'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-      'title': 'Elephants Dream',
-      'channel': 'Open Movie',
-      'thumbnail': 'https://img.freepik.com/free-photo/3d-portrait-little-girl-holding-flower-with-copy-space_23-2151061839.jpg'
-    },
-    {
-      'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
-      'title': 'Sintel',
-      'channel': 'Blender Foundation',
-      'thumbnail': 'https://t3.ftcdn.net/jpg/08/98/83/96/360_F_898839604_7RcqsUoZHOaZNB25DIDh5DwtQyNeAz5U.jpg'
-    },
+    
   ];
 
   @override
@@ -142,8 +125,8 @@ class MyAppState extends State<MyApp> {
             body: CustomScrollView(
               slivers: [
                 SliverAppBar(
-                  pinned: false,
-                  expandedHeight: 250.0, // Fixed height for app bar
+                  pinned: true,
+                  expandedHeight: 300.0,
                   flexibleSpace: FlexibleSpaceBar(
                     background: Stack(
                       children: [
@@ -151,7 +134,7 @@ class MyAppState extends State<MyApp> {
                             ? VideoPlayer(_controller)
                             : const Center(child: CircularProgressIndicator()),
                         Positioned(
-                          top: MediaQuery.of(context).size.height * 0.16,
+                          top: MediaQuery.of(context).size.height * 0.20,
                           left: 0,
                           right: 0,
                           child: Center(
@@ -170,6 +153,7 @@ class MyAppState extends State<MyApp> {
                                 color: Colors.transparent,
                                 padding: const EdgeInsets.all(5),
                                 child: Icon(
+                    
                                   _isVideoPlaying ? Icons.pause : Icons.play_arrow,
                                   color: Colors.white,
                                   size: 40,
@@ -178,7 +162,6 @@ class MyAppState extends State<MyApp> {
                             ),
                           ),
                         ),
-                  
                       ],
                     ),
                   ),
@@ -190,7 +173,7 @@ class MyAppState extends State<MyApp> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             CircleAvatar(
                               radius: 20,
@@ -204,12 +187,14 @@ class MyAppState extends State<MyApp> {
                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(width: 8),
-                            Text(
-                              '1M subscribers',
-                              style: TextStyle(fontSize: 14, color: Colors.grey),
-                            ),
+                        Text(
+                          '1M subscribers',
+                          style: TextStyle(fontSize: 14, color: Colors.grey),
+                        ),
                           ],
                         ),
+                        
+                       
                       ],
                     ),
                   ),
@@ -218,15 +203,11 @@ class MyAppState extends State<MyApp> {
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.all(0.0),
                         child: Card(
-                          margin: const EdgeInsets.symmetric(vertical: 5),
+                          margin: const EdgeInsets.symmetric(vertical: 5,),
                           child: ListTile(
-                            leading: Image.network(
-                              videoUrls[index]['thumbnail']!,
-                              width: 100,
-                              fit: BoxFit.cover,
-                            ),
+                            leading: Image.network(videoUrls[index]['thumbnail']!,width:100,fit: BoxFit.cover,),
                             title: Text(
                               videoUrls[index]['title']!,
                               style: TextStyle(fontWeight: FontWeight.bold),
